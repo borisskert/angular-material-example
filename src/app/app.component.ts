@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {Table} from "./table/table-stuff";
+import {createTableStuffFrom, Table, TableStuff} from "./table/table-stuff";
 
 @Component({
   selector: 'app-root',
@@ -8,7 +8,8 @@ import {Table} from "./table/table-stuff";
 })
 export class AppComponent {
   title = 'angular-material-example';
-  myTableData: Table = {
+
+  private readonly myTableData: Table = {
     rows: [
       {
         cells: [
@@ -69,4 +70,8 @@ export class AppComponent {
       }
     ]
   };
+
+  get tableStuff(): TableStuff {
+    return createTableStuffFrom(this.myTableData);
+  }
 }

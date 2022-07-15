@@ -1,15 +1,20 @@
-import {createColumnsFrom, createItemsFrom, Table, TableColumn} from "./table-stuff";
+import {createTableStuffFrom, Table, TableStuff} from "./table-stuff";
 
 describe('TableStuff', () => {
-  it('should create TableItems from empty table', () => {
+  it('should create TableStuff from empty table', () => {
     const table: Table = {
       rows: []
     }
 
-    expect(createItemsFrom(table)).toEqual([])
+    const expected: TableStuff = {
+      columns: [],
+      items: []
+    }
+
+    expect(createTableStuffFrom(table)).toEqual(expected)
   });
 
-  it('should create TableItems from table with one row and one column', () => {
+  it('should create TableStuff from table with one row and one column', () => {
     const table: Table = {
       rows: [{
         cells: [{
@@ -18,11 +23,16 @@ describe('TableStuff', () => {
       }]
     }
 
-    const expected = [{
-      '0': 'abc'
-    }]
+    const expected: TableStuff = {
+      columns: [{
+        name: '0'
+      }],
+      items: [{
+        '0': 'abc'
+      }]
+    }
 
-    expect(createItemsFrom(table)).toEqual(expected)
+    expect(createTableStuffFrom(table)).toEqual(expected)
   });
 
   it('should create TableItems from table with one row and two columns', () => {
@@ -36,12 +46,24 @@ describe('TableStuff', () => {
       }]
     }
 
-    const expected = [{
-      '0': 'abc',
-      '1': 'xyz',
-    }]
+    const expected: TableStuff = {
+      columns: [
+        {
+          name: '0'
+        },
+        {
+          name: '1'
+        }
+      ],
+      items: [
+        {
+          '0': 'abc',
+          '1': 'xyz',
+        }
+      ]
+    }
 
-    expect(createItemsFrom(table)).toEqual(expected)
+    expect(createTableStuffFrom(table)).toEqual(expected)
   });
 
   it('should create TableItems from table with two rows and two columns', () => {
@@ -63,104 +85,27 @@ describe('TableStuff', () => {
         }]
     }
 
-    const expected = [
-      {
-        '0': 'abc',
-        '1': 'xyz',
-      },
-      {
-        '0': 'uvw',
-        '1': 'qrs',
-      }]
-
-    expect(createItemsFrom(table)).toEqual(expected)
-  });
-
-  it('should create TableColumns from empty table', () => {
-    const table: Table = {
-      rows: []
-    }
-
-    expect(createColumnsFrom(table)).toEqual([])
-  });
-
-  it('should create TableColumns from table with one row and with one column', () => {
-    const table: Table = {
-      rows: [{
-        cells: [{
-          text: 'abc'
-        }]
-      }]
-    }
-
-    const expected: TableColumn[] = [{
-      name: '0'
-    }]
-
-    expect(createColumnsFrom(table)).toEqual(expected)
-  });
-
-  it('should create TableColumns from table with one row and with two columns', () => {
-    const table: Table = {
-      rows: [
+    const expected: TableStuff = {
+      columns: [
         {
-          cells: [
-            {
-              text: 'abc'
-            },
-            {
-              text: 'xyz'
-            }
-          ]
-        }]
-    }
-
-    const expected: TableColumn[] = [
-      {
-        name: '0'
-      },
-      {
-        name: '1'
-      }
-    ]
-
-    expect(createColumnsFrom(table)).toEqual(expected)
-  });
-
-  it('should create TableColumns from table with two rows and with two columns', () => {
-    const table: Table = {
-      rows: [
-        {
-          cells: [
-            {
-              text: 'abc'
-            }, {
-              text: 'xyz'
-            }
-          ]
+          name: '0'
         },
         {
-          cells: [
-            {
-              text: 'uvw'
-            }, {
-              text: 'qrs'
-            }
-          ]
+          name: '1'
         }
-      ]
+      ],
+      items: [
+        {
+          '0': 'abc',
+          '1': 'xyz',
+        },
+        {
+          '0': 'uvw',
+          '1': 'qrs',
+        }]
     }
 
-    const expected: TableColumn[] = [
-      {
-        name: '0'
-      },
-      {
-        name: '1'
-      }
-    ]
-
-    expect(createColumnsFrom(table)).toEqual(expected)
+    expect(createTableStuffFrom(table)).toEqual(expected)
   });
 
   it('should create TableColumns from table with two rows and with two and three columns', () => {
@@ -192,18 +137,30 @@ describe('TableStuff', () => {
       ]
     }
 
-    const expected: TableColumn[] = [
-      {
-        name: '0'
-      },
-      {
-        name: '1'
-      },
-      {
-        name: '2'
-      }
-    ]
+    const expected: TableStuff = {
+      columns: [
+        {
+          name: '0'
+        },
+        {
+          name: '1'
+        },
+        {
+          name: '2'
+        }
+      ],
+      items: [
+        {
+          '0': 'abc',
+          '1': 'xyz',
+        },
+        {
+          '0': 'uvw',
+          '1': 'qrs',
+          '2': 'bhu',
+        }]
+    }
 
-    expect(createColumnsFrom(table)).toEqual(expected)
+    expect(createTableStuffFrom(table)).toEqual(expected)
   });
 });

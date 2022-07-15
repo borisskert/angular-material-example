@@ -16,7 +16,7 @@ export interface TableItem {
 
 const toObject = (obj: any, x: any): any => ({...obj, ...x})
 
-export function createItemsFrom(table: Table): TableItem[] {
+function createItemsFrom(table: Table): TableItem[] {
   return table.rows.map(rowToTableItem)
 }
 
@@ -30,16 +30,33 @@ export interface TableColumn {
   name: string;
 }
 
-export function createColumnsFrom(table: Table): TableColumn[] {
-  let tableItems = createItemsFrom(table);
-
+function createColumnsFrom(tableItems: TableItem[]): TableColumn[] {
   const sortedColumnNames = tableItems
     .map(item => Object.keys(item))
-    .sort((a1, a2) => a2.length - a1.length);
+    .sort((a, b) => b.length - a.length);
 
   if (sortedColumnNames.length < 1) {
     return []
   }
 
   return sortedColumnNames[0].map(name => ({name}))
+}
+
+export interface TableStuff {
+  columns: TableColumn[];
+  items: TableItem[];
+}
+
+export const EMPTY: TableStuff = {
+  columns: [],
+  items: [],
+}
+
+export function createTableStuffFrom(table: Table): TableStuff {
+  const items = createItemsFrom(table);
+
+  return {
+    columns: createColumnsFrom(items),
+    items,
+  }
 }
