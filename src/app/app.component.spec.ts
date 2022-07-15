@@ -2,6 +2,7 @@ import {TestBed} from '@angular/core/testing';
 import {AppComponent} from './app.component';
 import {TableComponent} from "./table/table.component";
 import {MaterialModule} from "./material/material.module";
+import {GridComponent} from "./grid/grid.component";
 
 describe('AppComponent', () => {
   beforeEach(async () => {
@@ -9,7 +10,8 @@ describe('AppComponent', () => {
       imports: [MaterialModule],
       declarations: [
         AppComponent,
-        TableComponent
+        TableComponent,
+        GridComponent,
       ],
     }).compileComponents();
   });

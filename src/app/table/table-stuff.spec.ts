@@ -1,4 +1,5 @@
-import {createTableStuffFrom, Table, TableStuff} from "./table-stuff";
+import {createTableStuffFrom, TableStuff} from "./table-stuff";
+import {Table} from "../input";
 
 describe('TableStuff', () => {
   it('should create TableStuff from empty table', () => {

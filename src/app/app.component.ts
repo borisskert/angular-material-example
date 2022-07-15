@@ -1,5 +1,7 @@
 import {Component} from '@angular/core';
-import {createTableStuffFrom, Table, TableStuff} from "./table/table-stuff";
+import {createTableStuffFrom, TableStuff} from "./table/table-stuff";
+import {Table} from "./input";
+import {createGridFrom, GridStuff} from "./grid/grid-stuff";
 
 @Component({
   selector: 'app-root',
@@ -73,5 +75,9 @@ export class AppComponent {
 
   get tableStuff(): TableStuff {
     return createTableStuffFrom(this.myTableData);
+  }
+
+  get gridStuff(): GridStuff {
+    return createGridFrom(this.myTableData);
   }
 }

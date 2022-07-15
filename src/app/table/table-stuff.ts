@@ -1,14 +1,4 @@
-export interface Table {
-  rows: Row[];
-}
-
-export interface Row {
-  cells: Cell[];
-}
-
-export interface Cell {
-  text: string;
-}
+import {Row, Table} from "../input";
 
 export interface TableItem {
   [key: string]: string
