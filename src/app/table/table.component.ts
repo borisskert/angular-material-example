@@ -1,4 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {createColumnsFrom, createItemsFrom, Table, TableColumn, TableItem} from "./table-stuff";
 
 export interface PeriodicElement {
   name: string;
@@ -27,8 +28,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class TableComponent implements OnInit {
 
-  public readonly myDataArray: any[] = ELEMENT_DATA;
-  public readonly displayedColumns = ['position', 'name', 'weight', 'symbol'];
+  @Input() table: Table = {rows: []}
 
   constructor() {
   }
@@ -36,4 +36,15 @@ export class TableComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  get columns(): TableColumn[] {
+    return createColumnsFrom(this.table);
+  }
+
+  get displayedColumns(): string[] {
+    return this.columns.map(column => column.name);
+  }
+
+  get items(): TableItem[] {
+    return createItemsFrom(this.table);
+  }
 }
