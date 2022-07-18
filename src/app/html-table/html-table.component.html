@@ -1,0 +1,10 @@
+<table>
+  <tr *ngFor="let row of table.rows">
+    <ng-container *ngIf="row.type === 'row'">
+      <td *ngFor="let cell of row.cells">{{cell.text}}</td>
+    </ng-container>
+    <ng-container *ngIf="row.type === 'line'">
+      <td [colSpan]="columns">{{row.text}}</td>
+    </ng-container>
+  </tr>
+</table>

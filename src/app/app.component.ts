@@ -87,4 +87,8 @@ export class AppComponent {
   get gridStuff(): GridStuff {
     return createGridFrom(this.myTableData);
   }
+
+  get table(): Table {
+    return this.myTableData;
+  }
 }

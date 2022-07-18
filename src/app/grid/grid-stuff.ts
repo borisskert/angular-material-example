@@ -1,15 +1,4 @@
-import {Table} from "../input";
-
-export function columnsFrom(table: Table) {
-  const lengths: number[] = table.rows.map(row => {
-    if (row.type === 'row') {
-      return row.cells.length;
-    }
-
-    return 1;
-  });
-  return Math.max(...lengths, 0)
-}
+import {columnsFrom, Table} from "../input";
 
 export interface GridRow {
   items: GridItem[];

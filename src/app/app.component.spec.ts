@@ -3,6 +3,7 @@ import {AppComponent} from './app.component';
 import {TableComponent} from "./table/table.component";
 import {MaterialModule} from "./material/material.module";
 import {GridComponent} from "./grid/grid.component";
+import {HtmlTableComponent} from "./html-table/html-table.component";
 
 describe('AppComponent', () => {
   beforeEach(async () => {
@@ -12,6 +13,7 @@ describe('AppComponent', () => {
         AppComponent,
         TableComponent,
         GridComponent,
+        HtmlTableComponent,
       ],
     }).compileComponents();
   });
