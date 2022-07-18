@@ -1,7 +1,13 @@
 import {Table} from "../input";
 
 export function columnsFrom(table: Table) {
-  const lengths: number[] = table.rows.map(row => row.cells.length);
+  const lengths: number[] = table.rows.map(row => {
+    if (row.type === 'row') {
+      return row.cells.length;
+    }
+
+    return 1;
+  });
   return Math.max(...lengths, 0)
 }
 
@@ -11,6 +17,7 @@ export interface GridRow {
 
 export interface GridItem {
   text: string;
+  columns?: number;
 }
 
 export interface GridStuff {
@@ -27,11 +34,21 @@ export function createGridFrom(table: Table): GridStuff {
   const columns = columnsFrom(table);
 
   const rows = table.rows.map(row => {
-    const items = row.cells.map(cell => ({text: cell.text}));
+    if (row.type === 'row') {
+      const items = row.cells.map(cell => ({text: cell.text}));
+      const others: GridItem[] = arrayOf({text: ''}, columns - items.length);
 
-    const others: GridItem[] = arrayOf({text: ''}, columns - items.length);
-
-    return ({items: [...items, ...others]})
+      return ({items: [...items, ...others]})
+    } else {
+      return {
+        items: [
+          {
+            text: row.text,
+            columns
+          }
+        ]
+      }
+    }
   });
 
   return {

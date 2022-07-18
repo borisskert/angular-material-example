@@ -1,4 +1,4 @@
-import {Row, Table} from "../input";
+import {Line, Row, Table} from "../input";
 
 export interface TableItem {
   [key: string]: string
@@ -10,10 +10,16 @@ function createItemsFrom(table: Table): TableItem[] {
   return table.rows.map(rowToTableItem)
 }
 
-function rowToTableItem(row: Row): TableItem {
-  return row.cells
-    .map((cell, index) => ({[index]: cell.text}))
-    .reduce(toObject)
+function rowToTableItem(row: Row | Line): TableItem {
+  if(row.type === 'row') {
+    return row.cells
+      .map((cell, index) => ({[index]: cell.text}))
+      .reduce(toObject)
+  } else {
+    return {
+      '0': row.text,
+    }
+  }
 }
 
 export interface TableColumn {

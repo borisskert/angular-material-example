@@ -1,6 +1,7 @@
 <mat-grid-list *ngFor="let row of rows" [cols]="columns" rowHeight="50px">
   <mat-grid-tile *ngFor="let cell of row.items"
                  [style.background]="'green'"
+                 [colspan]="cell.columns || 1"
   >
     {{cell.text}}
   </mat-grid-tile>

@@ -18,11 +18,16 @@ describe('TableStuff', () => {
 
   it('should create GridStuff from table with one row and one column', () => {
     const table: Table = {
-      rows: [{
-        cells: [{
-          text: 'abc'
-        }]
-      }]
+      rows: [
+        {
+          type: 'row',
+          cells: [
+            {
+              text: 'abc'
+            }
+          ]
+        }
+      ]
     }
 
     const expected: GridStuff = {
@@ -45,6 +50,7 @@ describe('TableStuff', () => {
     const table: Table = {
       rows: [
         {
+          type: 'row',
           cells: [
             {
               text: 'abc'
@@ -80,6 +86,7 @@ describe('TableStuff', () => {
     const table: Table = {
       rows: [
         {
+          type: 'row',
           cells: [
             {
               text: 'abc'
@@ -89,6 +96,7 @@ describe('TableStuff', () => {
           ]
         },
         {
+          type: 'row',
           cells: [
             {
               text: 'uvw'
@@ -131,6 +139,7 @@ describe('TableStuff', () => {
     const table: Table = {
       rows: [
         {
+          type: 'row',
           cells: [
             {
               text: 'abc'
@@ -141,6 +150,7 @@ describe('TableStuff', () => {
           ]
         },
         {
+          type: 'row',
           cells: [
             {
               text: 'uvw'
@@ -169,6 +179,84 @@ describe('TableStuff', () => {
             },
             {
               text: ''
+            }
+          ]
+        },
+        {
+          items: [
+            {
+              text: 'uvw'
+            },
+            {
+              text: 'qrs'
+            },
+            {
+              text: 'bhu'
+            }
+          ]
+        }
+      ]
+    }
+
+    expect(createGridFrom(table)).toEqual(expected)
+  });
+
+  it('should create GridStuff from table with two rows and with two and three columns and a line', () => {
+    const table: Table = {
+      rows: [
+        {
+          type: 'row',
+          cells: [
+            {
+              text: 'abc'
+            },
+            {
+              text: 'xyz'
+            }
+          ]
+        },
+        {
+          type: 'line',
+          text: 'qwerty'
+        },
+        {
+          type: 'row',
+          cells: [
+            {
+              text: 'uvw'
+            },
+            {
+              text: 'qrs'
+            },
+            {
+              text: 'bhu'
+            }
+          ]
+        }
+      ]
+    }
+
+    const expected: GridStuff = {
+      columns: 3,
+      rows: [
+        {
+          items: [
+            {
+              text: 'abc'
+            },
+            {
+              text: 'xyz'
+            },
+            {
+              text: ''
+            }
+          ]
+        },
+        {
+          items: [
+            {
+              text: 'qwerty',
+              columns: 3,
             }
           ]
         },

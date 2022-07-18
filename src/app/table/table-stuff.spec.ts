@@ -17,11 +17,15 @@ describe('TableStuff', () => {
 
   it('should create TableStuff from table with one row and one column', () => {
     const table: Table = {
-      rows: [{
-        cells: [{
-          text: 'abc'
-        }]
-      }]
+      rows: [
+        {
+          type: 'row',
+          cells: [{
+            text: 'abc'
+          }
+          ]
+        }
+      ]
     }
 
     const expected: TableStuff = {
@@ -38,13 +42,19 @@ describe('TableStuff', () => {
 
   it('should create TableItems from table with one row and two columns', () => {
     const table: Table = {
-      rows: [{
-        cells: [{
-          text: 'abc'
-        }, {
-          text: 'xyz'
-        }]
-      }]
+      rows: [
+        {
+          type: 'row',
+          cells: [
+            {
+              text: 'abc'
+            },
+            {
+              text: 'xyz'
+            }
+          ]
+        }
+      ]
     }
 
     const expected: TableStuff = {
@@ -71,19 +81,28 @@ describe('TableStuff', () => {
     const table: Table = {
       rows: [
         {
-          cells: [{
-            text: 'abc'
-          }, {
-            text: 'xyz'
-          }]
+          type: 'row',
+          cells: [
+            {
+              text: 'abc'
+            },
+            {
+              text: 'xyz'
+            }
+          ]
         },
         {
-          cells: [{
-            text: 'uvw'
-          }, {
-            text: 'qrs'
-          }]
-        }]
+          type: 'row',
+          cells: [
+            {
+              text: 'uvw'
+            },
+            {
+              text: 'qrs'
+            }
+          ]
+        }
+      ]
     }
 
     const expected: TableStuff = {
@@ -113,6 +132,7 @@ describe('TableStuff', () => {
     const table: Table = {
       rows: [
         {
+          type: 'row',
           cells: [
             {
               text: 'abc'
@@ -123,6 +143,7 @@ describe('TableStuff', () => {
           ]
         },
         {
+          type: 'row',
           cells: [
             {
               text: 'uvw'
@@ -154,6 +175,71 @@ describe('TableStuff', () => {
         {
           '0': 'abc',
           '1': 'xyz',
+        },
+        {
+          '0': 'uvw',
+          '1': 'qrs',
+          '2': 'bhu',
+        }]
+    }
+
+    expect(createTableStuffFrom(table)).toEqual(expected)
+  });
+
+  it('should create TableColumns from table with two rows and with two and three columns and a line', () => {
+    const table: Table = {
+      rows: [
+        {
+          type: 'row',
+          cells: [
+            {
+              text: 'abc'
+            },
+            {
+              text: 'xyz'
+            }
+          ]
+        },
+        {
+          type: 'line',
+          text: 'qwerty'
+        },
+        {
+          type: 'row',
+          cells: [
+            {
+              text: 'uvw'
+            },
+            {
+              text: 'qrs'
+            },
+            {
+              text: 'bhu'
+            }
+          ]
+        }
+      ]
+    }
+
+    const expected: TableStuff = {
+      columns: [
+        {
+          name: '0'
+        },
+        {
+          name: '1'
+        },
+        {
+          name: '2'
+        }
+      ],
+      items: [
+        {
+          '0': 'abc',
+          '1': 'xyz',
+        },
+        {
+          '0': 'qwerty',
         },
         {
           '0': 'uvw',

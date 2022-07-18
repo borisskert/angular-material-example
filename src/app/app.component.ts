@@ -14,6 +14,7 @@ export class AppComponent {
   private readonly myTableData: Table = {
     rows: [
       {
+        type: 'row',
         cells: [
           {
             text: 'a'
@@ -30,6 +31,11 @@ export class AppComponent {
         ]
       },
       {
+        type: 'line',
+        text: 'qwerty',
+      },
+      {
+        type: 'row',
         cells: [
           {
             text: 'z'
@@ -52,6 +58,7 @@ export class AppComponent {
         ]
       },
       {
+        type: 'row',
         cells: [
           {
             text: 'q'
